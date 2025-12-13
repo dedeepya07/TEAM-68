@@ -341,6 +341,10 @@ def main():
 
     # feat(balance)
     X_balanced, y_balanced = detector.balance_data(X_pca, y)
+
+    # feat(split)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_balanced, y_balanced, test_size=0.2, random_state=SEED, stratify=y_balanced
     )
     
     print(f"\nTraining data shape: {X_train.shape}")
