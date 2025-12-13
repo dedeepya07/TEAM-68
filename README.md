@@ -16,23 +16,14 @@ The project is developed as part of the **GenAI Hackathon 2025** under the **AI 
 
 ## 2. Problem Statement
 
-Contemporary financial fraud detection systems operate over high-dimensional, heterogeneous, and highly imbalanced transactional datasets characterized by strong non-linearity, temporal dependencies, and concept drift. Classical machine learning and deep learning approaches often exhibit degraded performance under these conditions due to limited expressive capacity in complex feature spaces and sensitivity to noise.
+Existing fraud detection systems face several limitations:
+- Difficulty in capturing complex and non-linear fraud patterns
+- Performance degradation with high-dimensional transaction data
+- High false positive rates leading to operational inefficiencies
+- Limited explainability for regulatory and audit requirements
 
-Key technical challenges include:
+The goal of this project is to design a scalable, explainable, and near real-time fraud detection system that overcomes these limitations using hybrid classical–quantum techniques.
 
-Modeling non-linear decision boundaries in high-dimensional feature spaces where fraudulent and legitimate transactions exhibit significant overlap
-
-Scalability constraints arising from increasing transaction volume, feature dimensionality, and real-time inference requirements
-
-High false-positive rates caused by suboptimal feature separability and class imbalance, resulting in increased computational overhead and analyst intervention
-
-Limited model interpretability, restricting traceability of decision logic and compliance with regulatory and audit requirements
-
-These limitations are further exacerbated under noisy data conditions and evolving fraud patterns, where static or purely classical models struggle to generalize effectively.
-
-Objective
-
-The objective of this work is to design and evaluate a hybrid classical–quantum fraud detection framework that leverages quantum feature mapping and quantum kernel methods to enhance class separability in complex, high-dimensional spaces. The framework aims to achieve scalable, low-latency inference, reduced false-positive rates, and explainable decision outputs, while remaining compatible with near-term quantum hardware and classical deployment constraints
 ---
 
 ## 3. Solution Approach
@@ -46,27 +37,92 @@ The hybrid approach enables practical deployment while leveraging quantum comput
 
 ---
 
-## 4. System Architecture
+System Architecture
 
-The architecture follows a classical preprocessing and quantum inference pipeline, optimized for both accuracy and computational feasibility.
+The system follows a hybrid classical–quantum pipeline designed to balance detection accuracy, computational efficiency, and real-world deployability. Classical components manage data scalability and noise handling, while quantum components enhance pattern separability during inference.
 
----
+Architectural Flow
+Raw Transaction Streams
+        ↓
+Data Cleaning & Feature Engineering (Classical)
+        ↓
+Dimensionality Reduction & Encoding
+(PCA / Feature Selection / Quantum Encoding)
+        ↓
+Quantum Inference Layer
+(QSVM | VQC | QNN)
+        ↓
+Hybrid Decision Engine
+(Thresholding + Risk Scoring)
+        ↓
+Explainability & Compliance Layer
+        ↓
+Real-Time Fraud Dashboard
+Design Considerations
 
-## 5. Models Implemented
+Low-latency inference suitable for near real-time fraud detection
 
-### 5.1 Quantum Support Vector Machine (QSVM)
-Uses quantum kernel methods to identify non-linear decision boundaries in high-dimensional fraud data.
+Noise-aware quantum encoding compatible with NISQ-era hardware
 
-### 5.2 Variational Quantum Classifier (VQC)
-Employs parameterized quantum circuits optimized through iterative training to improve classification performance.
+Modular architecture enabling independent evaluation of quantum models
 
-### 5.3 Quantum Neural Network (QNN)
-Captures temporal and behavioral patterns in transaction sequences, enabling behavioral fraud detection.
+Hybrid execution on classical systems with quantum backends or simulators
 
-### 5.4 Hybrid Classical–Quantum Strategy
-Classical models handle data preparation and dimensionality reduction, while quantum models perform inference to enhance detection capability.
+ Models Implemented
 
----
+The framework integrates multiple quantum machine learning models, each addressing distinct characteristics of financial fraud data.
+
+5.1 Quantum Support Vector Machine (QSVM)
+
+The QSVM leverages quantum kernel estimation to implicitly project classical transaction data into a high-dimensional Hilbert space.
+
+Identifies complex non-linear decision boundaries
+
+Effective for sparse and high-dimensional fraud features
+
+Reduces false positives through enhanced class separability
+
+Uses quantum circuits to compute kernel matrices during inference
+
+5.2 Variational Quantum Classifier (VQC)
+
+The VQC employs parameterized quantum circuits (PQCs) optimized via a hybrid training loop.
+
+Learns discriminative fraud patterns using trainable quantum gates
+
+Optimized with quantum-compatible optimizers (e.g., COBYLA, Adam)
+
+Robust under noisy and imbalanced data distributions
+
+Adjustable circuit depth for expressivity–hardware trade-offs
+
+5.3 Quantum Neural Network (QNN)
+
+The QNN captures temporal, sequential, and behavioral transaction patterns.
+
+Models transaction sequences and evolving user behavior
+
+Detects behavioral anomalies and coordinated fraud activity
+
+Supports hybrid classical–quantum architectures
+
+Enhances detection beyond single-transaction analysis
+
+5.4 Hybrid Classical–Quantum Strategy
+
+The hybrid strategy combines classical scalability with quantum expressivity:
+
+Classical ML performs preprocessing, feature extraction, and dimensionality reduction
+
+Quantum models execute inference in enriched feature spaces
+
+Enables practical deployment while exploring quantum advantage
+
+Supports gradual transition as quantum hardware matures
+
+Classical ML handles scalability and preprocessing
+
+Quantum models enhance pattern separability and inference---
 
 ## 6. Dataset and Preprocessing
 
