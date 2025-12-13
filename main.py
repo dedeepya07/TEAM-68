@@ -338,6 +338,9 @@ def main():
 
     #  feat(preprocess)
     X_pca = detector.prepare_features(X, n_components=10)
+
+    # feat(balance)
+    X_balanced, y_balanced = detector.balance_data(X_pca, y)
     )
     
     print(f"\nTraining data shape: {X_train.shape}")
