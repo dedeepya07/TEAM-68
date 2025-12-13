@@ -335,6 +335,12 @@ def main():
     # Split data (small subset for MVP)
     X_train, X_test, y_train, y_test = train_test_split(
         X_balanced, y_balanced, test_size=0.2, random_state=SEED, stratify=y_balanced
+
+    #  feat(preprocess)
+    X_pca = detector.prepare_features(X, n_components=10)
+
+    # feat(balance)
+    X_balanced, y_balanced = detector.balance_data(X_pca, y)
     )
     
     print(f"\nTraining data shape: {X_train.shape}")
