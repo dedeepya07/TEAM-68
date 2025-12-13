@@ -16,14 +16,23 @@ The project is developed as part of the **GenAI Hackathon 2025** under the **AI 
 
 ## 2. Problem Statement
 
-Existing fraud detection systems face several limitations:
-- Difficulty in capturing complex and non-linear fraud patterns
-- Performance degradation with high-dimensional transaction data
-- High false positive rates leading to operational inefficiencies
-- Limited explainability for regulatory and audit requirements
+Contemporary financial fraud detection systems operate over high-dimensional, heterogeneous, and highly imbalanced transactional datasets characterized by strong non-linearity, temporal dependencies, and concept drift. Classical machine learning and deep learning approaches often exhibit degraded performance under these conditions due to limited expressive capacity in complex feature spaces and sensitivity to noise.
 
-The goal of this project is to design a scalable, explainable, and near real-time fraud detection system that overcomes these limitations using hybrid classical–quantum techniques.
+Key technical challenges include:
 
+Modeling non-linear decision boundaries in high-dimensional feature spaces where fraudulent and legitimate transactions exhibit significant overlap
+
+Scalability constraints arising from increasing transaction volume, feature dimensionality, and real-time inference requirements
+
+High false-positive rates caused by suboptimal feature separability and class imbalance, resulting in increased computational overhead and analyst intervention
+
+Limited model interpretability, restricting traceability of decision logic and compliance with regulatory and audit requirements
+
+These limitations are further exacerbated under noisy data conditions and evolving fraud patterns, where static or purely classical models struggle to generalize effectively.
+
+Objective
+
+The objective of this work is to design and evaluate a hybrid classical–quantum fraud detection framework that leverages quantum feature mapping and quantum kernel methods to enhance class separability in complex, high-dimensional spaces. The framework aims to achieve scalable, low-latency inference, reduced false-positive rates, and explainable decision outputs, while remaining compatible with near-term quantum hardware and classical deployment constraints
 ---
 
 ## 3. Solution Approach
