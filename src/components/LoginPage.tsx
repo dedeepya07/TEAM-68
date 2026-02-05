@@ -14,9 +14,10 @@ interface LoginPageProps {
 
 export default function LoginPage({ onLogin }: LoginPageProps) {
   const [step, setStep] = useState<'login' | '2fa'>('login');
-  const [role, setRole] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // Pre-fill for easier demo access
+  const [role, setRole] = useState('fraud-analyst');
+  const [email, setEmail] = useState('analyst@securebank.com');
+  const [password, setPassword] = useState('secure123');
   const [otpCode, setOtpCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,11 +25,15 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password || !role) return;
-    
+
+    // Explicit validation feedback
+    if (!role) { setError('Please select a Security Clearance Level'); return; }
+    if (!email) { setError('Please enter your email'); return; }
+    if (!password) { setError('Please enter your password'); return; }
+
     setIsLoading(true);
     setError('');
-    
+
     // Basic email format validation (allows any email format)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -40,7 +45,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
     // Mock authentication - accept any email/password combination
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     try {
       // For demo purposes, accept any email and password
       // Just require minimum password length
@@ -52,11 +57,11 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
 
       setSuccess('Credentials verified! Proceed to two-factor authentication.');
       setStep('2fa');
-      
+
     } catch (err) {
       setError('Authentication service unavailable. Please try again later.');
     }
-    
+
     setIsLoading(false);
   };
 
@@ -75,7 +80,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/30"></div>
-      
+
       <Card className="w-full max-w-lg relative z-10 backdrop-blur-md bg-white/95 dark:bg-gray-900/95 border-0 shadow-2xl">
         <CardHeader className="text-center pb-8">
           <div className="flex items-center justify-center space-x-3 mb-6">
@@ -93,7 +98,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
             {step === 'login' ? 'Advanced Fraud Detection Platform' : 'Secure Access Verification'}
           </CardDescription>
         </CardHeader>
-        
+
         <CardContent className="space-y-6">
           {step === 'login' ? (
             <>
@@ -145,7 +150,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm font-medium">Corporate Email</Label>
                   <Input
@@ -158,7 +163,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                     required
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-sm font-medium">Secure Password</Label>
                   <Input
@@ -174,11 +179,11 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                     New users will be automatically registered with security approval
                   </p>
                 </div>
-                
-                <Button 
-                  type="submit" 
+
+                <Button
+                  type="submit"
                   className="w-full h-12 bg-gradient-to-r from-blue-600 via-cyan-600 to-emerald-600 hover:from-blue-700 hover:via-cyan-700 hover:to-emerald-700 text-white font-medium shadow-lg"
-                  disabled={isLoading || !role || !email || !password}
+                  disabled={isLoading}
                 >
                   {isLoading ? (
                     <div className="flex items-center space-x-2">
@@ -223,7 +228,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                   </AlertDescription>
                 </Alert>
               )}
-              
+
               <form onSubmit={handle2FA} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="otp" className="text-sm font-medium">Verification Code</Label>
@@ -241,9 +246,9 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                     required
                   />
                 </div>
-                
-                <Button 
-                  type="submit" 
+
+                <Button
+                  type="submit"
                   className="w-full h-12 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium"
                   disabled={otpCode.length !== 6}
                 >
@@ -252,7 +257,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                     <span>Verify & Access Platform</span>
                   </div>
                 </Button>
-                
+
                 <Button
                   type="button"
                   variant="outline"
